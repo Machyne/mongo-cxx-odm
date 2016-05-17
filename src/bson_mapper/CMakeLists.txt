@@ -16,7 +16,7 @@ project(BSON_MAPPER)
 
 set(LIBBSONCXX_REQUIRED_VERSION 3.0.2)
 #set(LIBBSONCXX_REQUIRED_ABI_VERSION no_abi)
-find_package(LibBsonCXX ${LIBBSONCXX_REQUIRED_VERSION} REQUIRED)
+find_package(libbsoncxx ${LIBBSONCXX_REQUIRED_VERSION} REQUIRED)
 
 # Update these as needed.
 # TODO: read from file

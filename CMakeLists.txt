@@ -46,10 +46,6 @@ set (CMAKE_INSTALL_RPATH_USE_LINK_PATH true)
 # Ensure that RPATH is used on OSX
 set(CMAKE_MACOSX_RPATH 1)
 
-# Add in our modules, we write FindX modules for libbson and libmongoc
-# since they don't currently install them.
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
-
 # Enforce the C++ standard, and disable extensions
 if(NOT DEFINED CMAKE_CXX_STANDARD)
     set(CMAKE_CXX_STANDARD 11)

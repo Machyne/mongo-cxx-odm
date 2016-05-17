@@ -12,19 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include "catch.hpp"
+
+#include <bsoncxx/types.hpp>
+
 #include <bson_mapper/file.hpp>
 
-#include <bsoncxx/builder/stream/document.hpp>
+TEST_CASE("time_point is converted to b_date and back", "[bsoncxx::types::b_date]") {
+    bson_mapper::file f{};
+    auto doc = f.encode("num", 123);
 
-#include <bson_mapper/config/prelude.hpp>
-
-namespace bson_mapper {
-BSON_MAPPER_INLINE_NAMESPACE_BEGIN
-
-bsoncxx::document::value file::encode(const char* str, int x) {
-    return bsoncxx::builder::stream::document{} << std::string{str} << x
-                                                << bsoncxx::builder::stream::finalize;
+    REQUIRE(doc.view()["num"].get_int32() == 123);
 }
-
-BSON_MAPPER_INLINE_NAMESPACE_END
-}  // namespace bson_mapper

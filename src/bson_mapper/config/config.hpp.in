@@ -1,4 +1,4 @@
-// Copyright 2016 MongoDB Inc.
+// Copyright 2014 MongoDB Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,19 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <bson_mapper/file.hpp>
+#cmakedefine BSON_MAPPER_POLY_USE_STD_EXPERIMENTAL
+#cmakedefine BSON_MAPPER_POLY_USE_MNMLSTC
+#cmakedefine BSON_MAPPER_POLY_USE_SYSTEM_MNMLSTC
+#cmakedefine BSON_MAPPER_POLY_USE_BOOST
 
-#include <bsoncxx/builder/stream/document.hpp>
+#define BSON_MAPPER_INLINE_NAMESPACE_BEGIN inline namespace @BSON_MAPPER_INLINE_NAMESPACE@ {
 
-#include <bson_mapper/config/prelude.hpp>
-
-namespace bson_mapper {
-BSON_MAPPER_INLINE_NAMESPACE_BEGIN
-
-bsoncxx::document::value file::encode(const char* str, int x) {
-    return bsoncxx::builder::stream::document{} << std::string{str} << x
-                                                << bsoncxx::builder::stream::finalize;
-}
-
-BSON_MAPPER_INLINE_NAMESPACE_END
-}  // namespace bson_mapper
+#define BSON_MAPPER_INLINE_NAMESPACE_END }  // namespace @BSON_MAPPER_INLINE_NAMESPACE@

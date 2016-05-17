@@ -1,4 +1,4 @@
-// Copyright 2016 MongoDB Inc.
+// Copyright 2015 MongoDB Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,19 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <bson_mapper/file.hpp>
+#if defined(_MSC_VER)
 
-#include <bsoncxx/builder/stream/document.hpp>
+// Disable MSVC warnings that cause a lot of noise related to DLL visibility
+// for types that we don't control (like std::unique_ptr).
+#pragma warning(push)
+#pragma warning(disable : 4251 4275)
 
-#include <bson_mapper/config/prelude.hpp>
+#define BSON_MAPPER_INLINE inline __forceinline BSON_MAPPER_PRIVATE
 
-namespace bson_mapper {
-BSON_MAPPER_INLINE_NAMESPACE_BEGIN
+#define BSON_MAPPER_CALL __cdecl
 
-bsoncxx::document::value file::encode(const char* str, int x) {
-    return bsoncxx::builder::stream::document{} << std::string{str} << x
-                                                << bsoncxx::builder::stream::finalize;
-}
+#else
 
-BSON_MAPPER_INLINE_NAMESPACE_END
-}  // namespace bson_mapper
+#define BSON_MAPPER_INLINE inline __attribute__((__always_inline__)) BSON_MAPPER_PRIVATE
+
+#define BSON_MAPPER_CALL
+
+#endif

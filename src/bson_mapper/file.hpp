@@ -23,7 +23,7 @@ BSON_MAPPER_INLINE_NAMESPACE_BEGIN
 
 class BSON_MAPPER_API file {
    public:
-      bsoncxx::document::value encode(const char* str, int x);
+    bsoncxx::document::value encode(const char* str, int x);
 };
 
 BSON_MAPPER_INLINE_NAMESPACE_END

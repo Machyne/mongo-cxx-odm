@@ -12,19 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <bson_mapper/file.hpp>
+#define CATCH_CONFIG_RUNNER
+#include "catch.hpp"
 
-#include <bsoncxx/builder/stream/document.hpp>
-
-#include <bson_mapper/config/prelude.hpp>
-
-namespace bson_mapper {
-BSON_MAPPER_INLINE_NAMESPACE_BEGIN
-
-bsoncxx::document::value file::encode(const char* str, int x) {
-    return bsoncxx::builder::stream::document{} << std::string{str} << x
-                                                << bsoncxx::builder::stream::finalize;
+int main(int argc, char** argv) {
+    int result = Catch::Session().run(argc, argv);
 }
-
-BSON_MAPPER_INLINE_NAMESPACE_END
-}  // namespace bson_mapper
